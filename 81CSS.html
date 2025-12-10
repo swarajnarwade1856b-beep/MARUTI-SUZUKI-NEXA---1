@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fuel Cost Calculator</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin:0;
+    padding:0;
+    background: url('https://images.unsplash.com/photo-1600607689672-744a6a1c8f67?fit=crop&w=1350') no-repeat center/cover;
+    display:flex; justify-content:center; align-items:center;
+    height:100vh;
+    color: white;
+  }
+  .calculator {
+    background: rgba(255,255,255,0.9);
+    padding: 20px;
+    border-radius:10px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.3);
+    max-width:320px;
+    width:90%;
+    
+    background-color: #031926;
+  }
+  .calculator h2 { margin-top:0; text-align:center; }
+  .calculator label {
+    display:block; margin:10px 0 5px;
+  }
+  .calculator input, .calculator button {
+    width:100%; padding:10px; font-size:1em;
+    margin-bottom:10px; border:1px solid #ccc; border-radius:5px;
+  }
+  .calculator button {
+    background: #28a745; color:#fff;
+    border:none; cursor:pointer;
+    transition: background 0.3s;
+  }
+  .calculator button:hover {
+    background:#218838;
+  }
+  .result {
+    background:#f9f9f9; padding:10px;
+    border-radius:5px; text-align:center;
+    font-weight:bold;
+    color: black;
+  }
+  .calculator input{
+    width: 300px;
+  }
+  .calculator{
+     box-shadow: 5px 5px 5px black
+  }
+   label{
+    color: white;
+  }
+</style>
+</head>
+<body>
+
+<div class="calculator">
+  <h2>Fuel Cost Calculator</h2>
+  <label>Distance (km): <input type="number" id="distance"></label>
+  <label>Fuel used (L): <input type="number" id="fuel"></label>
+  <label>Price (₹/L): <input type="number" id="price"></label>
+  <button onclick="calculate()">Calculate</button>
+  <div id="output" class="result"></div>
+</div>
+
+<script>
+function calculate(){
+  const d = parseFloat(document.getElementById('distance').value);
+  const f = parseFloat(document.getElementById('fuel').value);
+  const p = parseFloat(document.getElementById('price').value);
+  if(!d||!f||!p){
+    output('Please fill all positive values.');
+    return;
+  }
+  const cons = (f/d)*100;
+  const total = f*p;
+  const perKm = total/d;
+  output(`
+    Consumption: ${cons.toFixed(2)} L/100 km<br>
+    Total cost: ₹${total.toFixed(2)}<br>
+    Cost per km: ₹${perKm.toFixed(2)}
+  `);
+}
+function output(html){ document.getElementById('output').innerHTML = html; }
+</script>
+
+</body>
+</html>
